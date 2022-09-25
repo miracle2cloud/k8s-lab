@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: student-pod
+  labels:
+    env: class-1
+spec:
+  containers: 
+  - name: c1
+    image: nginx

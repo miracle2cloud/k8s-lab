@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rc-students-class-2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      env: class-2
+  template:
+    metadata: 
+      name: rc-pod
+      labels:
+        env: class-2
+    spec:
+      containers: 
+      - name: rc-containers
+        image: nginx

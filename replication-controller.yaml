@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ReplicationController 
+metadata:
+  name: rc
+spec:
+  replicas: 2
+  template:
+    metadata: 
+      name: rc-pod
+      labels:
+        env: class-1
+    spec:
+      containers: 
+      - name: rc-containers
+        image: nginx
