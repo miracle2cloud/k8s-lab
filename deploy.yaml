@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-example
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      env: class-3
+  template:
+    metadata: 
+      name: rc-pod
+      labels:
+        env: class-3
+    spec:
+      containers: 
+      - name: rc-containers
+        image: httpd:2

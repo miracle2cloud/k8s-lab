@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: rolling-update-deploy
+spec:
+  strategy:
+    type: RollingUpdate 
+    rollingUpdate:
+        maxSurge: 2
+        maxUnavailable: 2
+  replicas: 4
+  selector:
+    matchLabels:
+      test: rolling-update
+  template:
+    metadata:
+      name: deploy-pod
+      labels:
+        test: rolling-update
+    spec:
+      containers:
+        - name: httpd-container
+          image: httpd:2
