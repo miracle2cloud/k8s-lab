@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service 
+metadata:
+  name: first-svc
+spec:
+  selector:
+    env: dev
+  type: NodePort
+  ports:
+    - targetPort: 80
+      port: 85
+      nodePort: 30001

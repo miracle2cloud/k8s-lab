@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: recreate-deploy
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      strategy-type: label-re-create-deploy
+  template:
+    metadata:
+      name: recreate-pod
+      labels:
+        strategy-type: label-re-create-deploy
+    spec:
+      containers:
+        - name: recreate-container
+          image: httpd:2

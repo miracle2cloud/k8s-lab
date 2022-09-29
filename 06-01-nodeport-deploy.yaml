@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: deploy-for-service
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  replicas: 3
+  selector:
+    matchLabels:
+      env: dev
+  template:
+    metadata:
+      name: deploy-pod
+      labels:
+        env: dev
+    spec:
+      containers:
+        - name: httpd-container
+          image: httpd:2
+          ports:
+            - containerPort: 80
