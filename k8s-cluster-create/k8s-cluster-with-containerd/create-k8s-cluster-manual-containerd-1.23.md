@@ -66,7 +66,7 @@ sudo service ssh restart
    $ sudo sysctl --system
    ```
  ### Install containerd packages, run time, restart and enable.
-    ```bash
+   ```bash
     $ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     $ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
     $ sudo apt update
@@ -76,7 +76,7 @@ sudo service ssh restart
     $ sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
     $ sudo systemctl restart containerd
     $ sudo systemctl enable containerd 
-    ```
+   ```
 ## Install K8S components Kubectl, kubeadm & kubelet(all nodes)
  ### Add apt repository for Kubernetes
  ```bash
