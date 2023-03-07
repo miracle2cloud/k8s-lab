@@ -100,7 +100,7 @@ sudo service ssh restart
  $ sudo chown $(id -u):$(id -g) $HOME/.kube/config
  $ kubectl taint node master node-role.kubernetes.io/master:NoSchedule-
  ```
-####  Install Weave Net network plugin (only Master)
+### Install Weave Net network plugin (only Master)
 ```bash
 #Install CNI so that pods can communicate across nodes and also Cluster DNS to start functioning. Apply weave CNI (Container Network Interface) on the master node
 $ kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
