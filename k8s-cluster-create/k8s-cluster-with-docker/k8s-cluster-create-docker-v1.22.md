@@ -2,7 +2,7 @@
 ### For GCP as below
 ### GCP-->gcloud commands to create 1 master and 2 worker node vms for the cluster(Ubuntu)
 ```bash
-gcloud compute instances create master worker-1 worker-2 --create-disk=auto-delete=yes,boot=yes,image=projects/ubuntu-os-cloud/global/images/ubuntu-1804-bionic-v20211115 --zone us-central1-a --machine-type=e2-medium
+gcloud compute instances create master worker-1 worker-2 --create-disk=auto-delete=yes,boot=yes,image=projects/ubuntu-os-cloud/global/images/ubuntu-2004-focal-v20230302 --zone us-central1-a --machine-type=e2-medium
 ```
 
 
