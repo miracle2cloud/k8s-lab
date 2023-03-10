@@ -88,6 +88,7 @@ sudo service ssh restart
  
  $ sudo apt update
  $ sudo apt install -y kubelet=1.23.0-00 kubeadm=1.23.0-00 kubectl=1.23.0-00
+ $ sudo systemctl enable kubelet
  $ sudo apt-mark hold kubelet kubeadm kubectl
  
  ```
