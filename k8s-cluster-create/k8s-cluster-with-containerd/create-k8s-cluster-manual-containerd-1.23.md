@@ -107,6 +107,6 @@ $ kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/
 $ kubectl get nodes
 
 #If you need to generate a new tokem use the below command (Optional Not required , if you have the above token generated)
-```bash
-$ sudo kubeadm token create --print-join-command
-``` 
+
+  $ sudo kubeadm token create --print-join-command
+
