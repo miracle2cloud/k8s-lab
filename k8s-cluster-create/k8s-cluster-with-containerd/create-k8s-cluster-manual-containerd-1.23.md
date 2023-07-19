@@ -109,4 +109,6 @@ $ kubectl get nodes
 #If you need to generate a new tokem use the below command (Optional Not required , if you have the above token generated)
 
   $ sudo kubeadm token create --print-join-command
-
+  
+### Execute Join command to the cluster from the above token received(only on Worker Nodes)
+  $ sudo kubeadm join master:6443 --token <received-token-above>
