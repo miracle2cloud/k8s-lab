@@ -25,11 +25,11 @@ sudo service ssh restart
 ```
 ### Set the following Kernel parameters for Kubernetes to configure sysctl to persist across system reboots
   ```bash
-  $ sudo tee /etc/sysctl.d/kubernetes.conf <<EOF
-    net.bridge.bridge-nf-call-ip6tables = 1
-    net.bridge.bridge-nf-call-iptables = 1
-    net.ipv4.ip_forward = 1
-    EOF 
+sudo tee /etc/sysctl.d/kubernetes.conf <<EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+EOF 
   ```
 ### Reload the above changes
   ```bash
@@ -42,11 +42,11 @@ sudo service ssh restart
   $ sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
   ```
 ### Load the following kernel modules on all the nodes
-  ```bash 
-  $ cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf
-    overlay
-    br_netfilter
-    EOF
+  ```bash
+cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf
+overlay
+br_netfilter
+EOF
 
   $ sudo modprobe overlay
   $ sudo modprobe br_netfilter
