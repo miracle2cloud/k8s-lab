@@ -23,18 +23,6 @@ $ sudo vi /etc/ssh/sshd_config
 PasswordAuthentication yes
 sudo service ssh restart
 ```
-### Set the following Kernel parameters for Kubernetes to configure sysctl to persist across system reboots
-  ```bash
-sudo tee /etc/sysctl.d/kubernetes.conf <<EOF
-net.bridge.bridge-nf-call-ip6tables = 1
-net.bridge.bridge-nf-call-iptables = 1
-net.ipv4.ip_forward = 1
-EOF 
-  ```
-### Reload the above changes
-  ```bash
-  $ sudo sysctl --system
-  ```
 ## Install containerd on all nodes (`Both master and worker`)
 ### Disable swap
   ```bash
