@@ -53,7 +53,7 @@ EOF
    ```bash
    $ sudo sysctl --system
    ```
- ### Install containerd packages, run time, restart and enable.
+ ### Install containerd packages, run time, restart and enable.( Master and Worker Nodes)
    ```bash
     $ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     $ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
