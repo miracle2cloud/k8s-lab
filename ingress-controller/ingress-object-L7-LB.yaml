@@ -1,0 +1,150 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+spec:
+  selector:
+    matchLabels:
+      app: welcome-nginx
+  template:
+    metadata:
+      labels:
+        app: welcome-nginx
+    spec:
+      volumes:
+      - name: nginx-public
+        configMap:
+          name: nginx-index-html-configmap 
+      containers:
+      - name: actual-nginx-container
+        image: nginx
+        volumeMounts:
+        - name:  nginx-public
+          mountPath:  /usr/share/nginx/html
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-index-html-configmap
+  namespace: default
+data:
+  index.html: |
+    <html>
+    <h1><a href="http://miracle2cloud.xyz/">Welcome to NGINX</a></h1>
+    <h2><a href="http://miracle2cloud.xyz/zone-printer">Clik here for My Zone Locator</a></h2>
+    <h2><a href="http://miracle2cloud.xyz/whereami">Clik here for Where Cluster Belongs to</a></h2>
+    </html
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  type: ClusterIP
+  selector:
+    app: welcome-nginx
+  ports:
+  - port: 8000 #Any port
+    targetPort: 80
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zone-deploy
+spec:
+  selector:
+    matchLabels:
+      app: zone-printer
+  template:
+    metadata:
+      labels:
+        app: zone-printer
+    spec:
+      containers:
+      - name: zone-printer
+        image: gcr.io/google-samples/zone-printer:0.2
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zone-print-service
+spec:
+  type: ClusterIP
+  selector:
+    app: zone-printer
+  ports:
+  - port: 9000 
+    targetPort: 8080
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whereami-deploy
+spec:
+  selector:
+    matchLabels:
+      app: whereami
+  template:
+    metadata:
+      labels:
+        app: whereami
+    spec:
+      containers:
+      - name: whereami
+        image: gcr.io/google-samples/whereami:v1.2.6
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whereami-service
+spec:
+  type: ClusterIP
+  selector:
+    app: whereami
+  ports:
+  - port: 10000
+    targetPort: 8080
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: first-ingress
+spec:
+  defaultBackend:
+    service:
+      name: nginx-service
+      port:
+        number: 8000
+  rules:
+  - http:
+      paths:      
+      - path: /*
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: nginx-service
+            port:
+              number: 8000
+      - path: /zone-printer
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: zone-print-service
+            port:
+              number: 9000
+      - path: /whereami
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: whereami-service
+            port:
+              number: 10000
